@@ -1,0 +1,41 @@
+:root {
+    --primario: #f2cedb;
+    --primarioStrong: #bfa4b3;
+    --secundario: #7e778c;
+    --terciario: #0e2940;
+    --colorNavbar: #0c203b;
+}
+
+/* .MuiButton-text {
+    color: var(--primario) !important
+} */
+.navContainer{
+    width: 100%;
+    background-color: var(--colorNavbar);
+    height: 12vh;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:25px ;
+}
+
+.containerCategories{
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.containerBrand{
+    display: flex;
+    gap: 7px;
+}
+
+body {
+    background-color: var(--primario);
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}

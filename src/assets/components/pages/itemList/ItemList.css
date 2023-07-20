@@ -1,0 +1,20 @@
+:root {
+    --primario: #F2CEDB;
+    --primarioStrong: #BFA4B3;
+    --secundario: #7E778C;
+    --terciario: #0E2940;
+    --colorNavbar: #0C203B;
+} 
+/* Luego, los colores de la paleta seran usados desde theme Config */
+
+h2 {
+    color: var(--terciario);
+    background-color: var(--secundario);
+    text-align: center;
+}
+
+h2:hover {
+    color: white;
+    transform: scale(1.02);
+    transition: all 0.9s;
+}

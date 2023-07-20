@@ -1,0 +1,18 @@
+:root {
+    --primario: #f2cedb;
+    --primarioStrong: #bfa4b3;
+    --secundario: #7e778c;
+    --terciario: #0e2940;
+    --colorNavbar: #0c203b;
+}
+
+.navFooterContainer{
+    width: 100%;
+    background-color: var(--colorNavbar);
+    height: 8vh;
+    color: var(--primarioStrong);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:25px ;
+}

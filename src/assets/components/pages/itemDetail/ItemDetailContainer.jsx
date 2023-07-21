@@ -1,36 +1,57 @@
 import { useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
-import { products } from "../../../../productsMock";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
+// import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { db } from "../../../../firebaseConfig";
+import {getDoc, collection, doc} from "firebase/firestore"
+// import { CartContext } from "../../../../context/CartContext";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
 
-  let {id} = useParams()
+  let { id } = useParams();
 
-  
-  useEffect(()=>{
+  // const { addToCart, getQuantityById } = useContext(CartContext);
 
-    let promesa = new Promise( (resolve, reject)=>{
-      let productSelected = products.find((product)=> product.id === +id)
-      resolve(productSelected)
-      reject()
-    })
+  // let cantidadEnCarrito = getQuantityById(id);
 
-    promesa.then((res)=> setProduct(res) ).catch(err=>console.log(err))
+  useEffect(() => {
+    let refCollection = collection( db , "products" )
+    let refDoc = doc( refCollection, id )
+    getDoc(refDoc).then( res => setProduct({...res.data(), id: res.id}))
 
-  }, [id])
- 
+  }, [id]);
 
-  const agregarAlCarrito = (cantidad) => {
-    let data = {
-      ...product,
-      quantity: cantidad,
-    };
-    console.log(data);
-  };
+  // const agregarAlCarrito = (cantidad) => {
+  //   let data = {
+  //     ...product,
+  //     quantity: cantidad,
+  //   };
 
-  return <ItemDetail product={product} agregarAlCarrito={agregarAlCarrito} />;
+  //   addToCart(data);
+  //   toast.success("Producto agregado", {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
+
+  return (
+    <>
+      <ItemDetail
+        product={product}
+        // agregarAlCarrito={agregarAlCarrito}
+        // cantidadEnCarrito={cantidadEnCarrito}
+      />
+      {/* <ToastContainer /> */}
+    </>
+  );
 };
 
 export default ItemDetailContainer;

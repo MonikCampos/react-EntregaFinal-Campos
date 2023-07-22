@@ -3,9 +3,10 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 const CartContextComponent = ({ children }) => {
-    const [cart, setCart] = useState([]);
+    //Toda la logica para proveer a la aplicacion
+    
+    const [cart, setCart] = useState([]); //estado glogbal para ser usado en toda la app
 
-    // 5
     const addToCart = (product) => {
         let existe = cart.some((elemento) => elemento.id === product.id);
         if (existe) {
@@ -19,7 +20,6 @@ const CartContextComponent = ({ children }) => {
                     return elemento;
                 }
             });
-
             setCart(newArr);
         } else {
             setCart([...cart, product]);
@@ -35,7 +35,7 @@ const CartContextComponent = ({ children }) => {
         setCart(newArr);
     };
 
-    // RETORNE EL TOTAL DE CANTIDADES
+    // Retorna el total/ la cantidad total
     const getTotalQuantity = () => {
 
         let total = cart.reduce((acc, elemento) => {
@@ -46,8 +46,7 @@ const CartContextComponent = ({ children }) => {
     }
 
 
-    // RETORNE EL TOTAL DEL PRECIO
-
+    // Retorna el precio total
     const getTotalPrice = () => {
         let total = cart.reduce((acc, elemento) => {
             return acc + (elemento.price * elemento.quantity)
@@ -55,16 +54,14 @@ const CartContextComponent = ({ children }) => {
         return total
     }
 
-    // dado un id, saber las cantidades que hay
-
+    // Retorna la cantidad que hay, dado un ID
     const getQuantityById = (id) => {
-
         let producto = cart.find((elemento) => elemento.id === +id)
-
         // return producto ? producto.quantity : producto
         return producto?.quantity
     }
 
+    //estados, vbles y fnes disponibles para toda la app, dentro del arreglo
     let data = {
         cart,
         addToCart,
@@ -75,7 +72,8 @@ const CartContextComponent = ({ children }) => {
         getQuantityById
     };
 
-    return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
+    return <CartContext.Provider value={data}>{children}
+    </CartContext.Provider>;
 };
 
 export default CartContextComponent;

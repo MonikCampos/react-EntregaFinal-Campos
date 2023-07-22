@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 // import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { db } from "../../../../firebaseConfig";
 import {getDoc, collection, doc} from "firebase/firestore"
-// import { CartContext } from "../../../../context/CartContext";
+import { CartContext } from "../../../../context/CartContext";
+
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
 
   let { id } = useParams();
 
-  // const { addToCart, getQuantityById } = useContext(CartContext);
+  const { addToCart, getQuantityById } = useContext(CartContext);
 
-  // let cantidadEnCarrito = getQuantityById(id);
+  let cantidadEnCarrito = getQuantityById(id);
 
   useEffect(() => {
     let refCollection = collection( db , "products" )
@@ -23,13 +24,13 @@ const ItemDetailContainer = () => {
 
   }, [id]);
 
-  // const agregarAlCarrito = (cantidad) => {
-  //   let data = {
-  //     ...product,
-  //     quantity: cantidad,
-  //   };
+  const agregarAlCarrito = (cantidad) => {
+    let data = {
+      ...product,
+      quantity: cantidad,
+    };
 
-  //   addToCart(data);
+  addToCart(data);
   //   toast.success("Producto agregado", {
   //     position: "top-right",
   //     autoClose: 5000,
@@ -40,14 +41,14 @@ const ItemDetailContainer = () => {
   //     progress: undefined,
   //     theme: "dark",
   //   });
-  // };
+  };
 
   return (
     <>
       <ItemDetail
         product={product}
-        // agregarAlCarrito={agregarAlCarrito}
-        // cantidadEnCarrito={cantidadEnCarrito}
+        agregarAlCarrito={agregarAlCarrito}
+        cantidadEnCarrito={cantidadEnCarrito}
       />
       {/* <ToastContainer /> */}
     </>

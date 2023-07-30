@@ -6,6 +6,7 @@ const CartContextComponent = ({ children }) => {
     //Toda la logica para proveer a la aplicacion
     
     const [cart, setCart] = useState([]); //estado glogbal para ser usado en toda la app
+    //ver local storage
 
     const addToCart = (product) => {
         let existe = cart.some((elemento) => elemento.id === product.id);
@@ -22,6 +23,7 @@ const CartContextComponent = ({ children }) => {
             });
             setCart(newArr);
         } else {
+            //localStorage.setItem("cart", JSON.stringify(NEWARRAY))
             setCart([...cart, product]);
         }
     };

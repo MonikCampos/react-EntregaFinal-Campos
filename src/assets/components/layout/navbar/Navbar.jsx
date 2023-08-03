@@ -10,8 +10,7 @@ const Navbar = () => {
       <div className="navContainer">
         <div className="containerBrand">
         <Link to="/"><img src="https://res.cloudinary.com/dawadzlfe/image/upload/v1688424143/CODER-React/Dermo/LogoDermo_alltnj.png" alt="DermoCosmetic" /></Link>
-        </div>
-          
+        </div>          
         <div className="containerCategories">
           <Link to="/"><Button sx={{ color: "#F2CEDB" }}>Todos</Button></Link>
           <Link to="/brandName/Eucerin"><Button sx={{ color: "#F2CEDB" }}>Eucerin</Button></Link>

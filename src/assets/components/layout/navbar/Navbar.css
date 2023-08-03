@@ -6,9 +6,6 @@
     --colorNavbar: #0c203b;
 }
 
-/* .MuiButton-text {
-    color: var(--primario) !important
-} */
 .navContainer{
     width: 100%;
     background-color: var(--colorNavbar);

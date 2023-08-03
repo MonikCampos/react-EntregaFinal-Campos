@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig";
-
+import FadeLoader from "react-spinners/FadeLoader";
+import Skeleton from '@mui/material/Skeleton';
 
 const ItemListContainer = () => {
     const [items, setItems] = useState([]);
@@ -15,25 +16,42 @@ const ItemListContainer = () => {
         let consulta;
         let productsCollection = collection(db, "products");
 
-        if(!brandName){
+        if (!brandName) {
             consulta = productsCollection
-        }else{
-            consulta = query( productsCollection, where( "brand", "==", brandName) )
+        } else {
+            consulta = query(productsCollection, where("brand", "==", brandName))
         }
 
         getDocs(consulta).then((res) => {
-        // console.log(res.docs);
-        let arrayProductos = res.docs.map((product) => {
-            return { ...product.data(), id: product.id };
-        });
-        setItems(arrayProductos)
+            // console.log(res.docs);
+            let arrayProductos = res.docs.map((product) => {
+                return { ...product.data(), id: product.id };
+            });
+            setItems(arrayProductos)
         });
     }, [brandName]);
 
+    // if(items.length === 0) {
+    //     return <h1>Cargando...</h1>;
+    // } if con return temprano
+
+    //rendering ternario
+    // return (
+    // <>
+    //     <h2>DermoCosmetic: Productos</h2>
+    //     {
+    //         items.length === 0 ? <h1>Cargando...</h1> : <ItemList items={items} />  
+    //     }
+    // </>
+    // );
+
     return (
-    <>
-        <ItemList items={items} />
-    </>
+        <>
+            <h2 style={{ backgroundColor: "#7E778C"}}>DermoCosmetic: Productos</h2>
+            {
+                <ItemList items={items} />
+            }
+        </>
     );
 };
 

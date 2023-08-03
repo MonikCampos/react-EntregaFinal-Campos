@@ -39,16 +39,13 @@ const CartContextComponent = ({ children }) => {
 
     // Retorna el total/ la cantidad total
     const getTotalQuantity = () => {
-
         let total = cart.reduce((acc, elemento) => {
             return acc + elemento.quantity
         }, 0)
-
         return total
     }
 
-
-    // Retorna el precio total
+    //Retorna el monto total de la compra: precio por cantidad
     const getTotalPrice = () => {
         let total = cart.reduce((acc, elemento) => {
             return acc + (elemento.price * elemento.quantity)
@@ -59,10 +56,10 @@ const CartContextComponent = ({ children }) => {
     // Retorna la cantidad que hay, dado un ID
     const getQuantityById = (id) => {
         let producto = cart.find((elemento) => elemento.id === +id)
+        // elemento.id === +id con el más queda numérico
         // return producto ? producto.quantity : producto
-        return producto?.quantity
+        return producto?.quantity //optional changing, tecnica de rendering
     }
-
     //estados, vbles y fnes disponibles para toda la app, dentro del arreglo
     let data = {
         cart,
@@ -73,9 +70,7 @@ const CartContextComponent = ({ children }) => {
         getTotalPrice,
         getQuantityById
     };
-
     return <CartContext.Provider value={data}>{children}
     </CartContext.Provider>;
 };
-
 export default CartContextComponent;

@@ -10,11 +10,11 @@ import {
 import "./ItemDetail.css"
 import { Link } from "react-router-dom";
 
-const ItemDetail = ( { product, agregarAlCarrito } ) => {
+const ItemDetail = ( { cantidadEnCarrito, product, agregarAlCarrito } ) => {
   return (
     <div className="cardDetail">
       <Card sx={{ width: 500, backgroundColor: "#BFA4B3" }}>
-        <CardMedia sx={{ height: 440 }} image={product.img} title={product.title} />
+        <CardMedia sx={{ height: 440 }} image={product.img} title={product.title} component='img'/>
         <CardContent sx={{  backgroundColor: "#BFA4B3" }}>
           <Typography gutterBottom variant="h5" component="div">
             {product.title}
@@ -28,8 +28,8 @@ const ItemDetail = ( { product, agregarAlCarrito } ) => {
           </Typography>
         </CardContent>
         <CardActions sx={{  backgroundColor: "#BFA4B3" }}>
-          <CounterContainer stock={product.stock} agregarAlCarrito={agregarAlCarrito } />
-          <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver</Button></Link>   
+          <CounterContainer cantidadEnCarrito={cantidadEnCarrito} stock={product.stock} agregarAlCarrito={agregarAlCarrito } />
+          <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver</Button></Link>
         </CardActions>
       </Card>
     </div>

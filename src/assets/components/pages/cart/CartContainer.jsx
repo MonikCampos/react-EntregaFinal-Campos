@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { CartContext } from "../../../../context/CartContext"
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const CartContainer = () => {
   const { cart, clearCart, deleteById, getTotalPrice } =
@@ -49,7 +50,9 @@ const CartContainer = () => {
       {cart.length > 0 && (
         <>
           <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained" onClick={limpiar}>Limpiar carrito</Button>
-          <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained">Terminar compra</Button>
+          <Link to="/checkout">
+            <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained">Terminar compra</Button>  
+          </Link>
         </>
       )}
       {cart.length === 0 ? <h4 style={{ backgroundColor: "#F2CEDB"}}>El carrito está vacío</h4> : <h4 style={{ backgroundColor: "#7E778C"}}>El total del carrito es : {total} </h4>}

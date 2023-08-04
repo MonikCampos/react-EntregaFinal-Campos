@@ -1,47 +1,86 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+
+import { db } from "../../../../firebaseConfig";
+import {
+    addDoc,
+    collection,
+    serverTimestamp,
+    updateDoc,
+    doc,
+} from "firebase/firestore";
+import { Button } from "@mui/material";
+import { CartContext } from "../../../../context/CartContext";
 
 const CheckoutContainer = () => {
+    const { cart, getTotalPrice } = useContext(CartContext);
 
-    const navigate = useNavigate()
+    const [orderId, setOrderId] = useState("");
+
     const [userData, setUserData] = useState({
-        //un solo estado para todos los valores de los imput
         name: "",
-        lastName: "",
+        phone: "",
+        email: "",
     });
+    let total = getTotalPrice();
 
-    const funcionDelFormulario = (evento) => {
+    const handleSubmit = (evento) => {
         evento.preventDefault();
-        // AXIOS.POST("dasdasdas", userData) conexion con la api
-        console.log(userData);
-        // ACA QUIERO VOLVER AL HOME
-        navigate("/")
+
+        // AXIOS.POST("dasdasdas", userData)
+        let order = {
+            buyer: userData,
+            items: cart,
+            total,
+            date: serverTimestamp(),
+        };
+
+        // CREAR UNA ORDEN DE COMPRA
+        let ordersCollections = collection(db, "orders");
+        addDoc(ordersCollections, order).then((res) => setOrderId(res.id));
+
+        // MODIFICAR TODOS LOS PRODUCTOS EN SU STOCK
+        cart.forEach((elemento) => {
+            updateDoc(doc(db, "products", elemento.id), {
+                stock: elemento.stock - elemento.quantity,
+            });
+        });
     };
 
-    const funcionDeLosInput = (evento) => {
+    const handleChange = (evento) => {
         setUserData({ ...userData, [evento.target.name]: evento.target.value });
     };
 
     return (
         <div>
             <h1>Checkout</h1>
-            <form onSubmit={funcionDelFormulario}>
-                <input
-                    type="text"
-                    placeholder="Ingrese su nombre"
-                    name="name"
-                    onChange={funcionDeLosInput}
-                />
-                <input
-                    type="text"
-                    placeholder="Ingrese su apellido"
-                    name="lastName"
-                    onChange={funcionDeLosInput}
-                />
-                <br></br>
-                <button type="submit">Enviar</button>
-                <button type="button">Cancelar</button>
-            </form>
+
+            {!orderId ? (
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="ingrese su nombre"
+                        name="name"
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="ingrese su telefono"
+                        name="phone"
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="ingrese su email"
+                        name="email"
+                        onChange={handleChange}
+                    />
+                    <Button variant="contained" type="submit">
+                        Comprar
+                    </Button>
+                </form>
+            ) : (
+                <h3>Su numero de compra: {orderId} </h3>
+            )}
         </div>
     );
 };

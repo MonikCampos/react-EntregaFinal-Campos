@@ -60,7 +60,7 @@ const CartContainer = () => {
       )}
       {cart.length === 0 ? 
         <>
-          <h4 style={{ backgroundColor: "#F2CEDB"}}>El carrito está vacío</h4>
+          <h5 style={{ backgroundColor: "#F2CEDB"}}>El carrito está vacío</h5>
           <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver a Productos</Button></Link>
           <h2></h2>
         </> : <h4 style={{ backgroundColor: "#7E778C"}}>El total del carrito es : {total} </h4>}

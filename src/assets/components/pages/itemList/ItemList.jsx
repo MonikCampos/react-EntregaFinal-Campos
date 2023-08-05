@@ -5,6 +5,7 @@ import { Skeleton, Stack } from "@mui/material";
 const ItemList = ({ items }) => {
     let arr = [1, 2, 3, 4];
     return (
+        <>
         <section
             style={{
                 width: "100%",
@@ -26,6 +27,8 @@ const ItemList = ({ items }) => {
             </Stack>
             ))}
         </section>
+        <h2></h2>
+        </>
     );
 };
 

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-
 import { db } from "../../../../firebaseConfig";
 import {
     addDoc,
@@ -10,12 +9,11 @@ import {
 } from "firebase/firestore";
 import { Button } from "@mui/material";
 import { CartContext } from "../../../../context/CartContext";
+import { Link } from "react-router-dom";
 
 const CheckoutContainer = () => {
-    const { cart, getTotalPrice } = useContext(CartContext);
-
+    const { cart, clearCart, getTotalPrice } = useContext(CartContext);
     const [orderId, setOrderId] = useState("");
-
     const [userData, setUserData] = useState({
         name: "",
         phone: "",
@@ -25,8 +23,6 @@ const CheckoutContainer = () => {
 
     const handleSubmit = (evento) => {
         evento.preventDefault();
-
-        // AXIOS.POST("dasdasdas", userData)
         let order = {
             buyer: userData,
             items: cart,
@@ -34,16 +30,20 @@ const CheckoutContainer = () => {
             date: serverTimestamp(),
         };
 
-        // CREAR UNA ORDEN DE COMPRA
+        // Creación de la orden de compra
         let ordersCollections = collection(db, "orders");
         addDoc(ordersCollections, order).then((res) => setOrderId(res.id));
 
-        // MODIFICAR TODOS LOS PRODUCTOS EN SU STOCK
+        // Modifica es stock de los productos
         cart.forEach((elemento) => {
             updateDoc(doc(db, "products", elemento.id), {
                 stock: elemento.stock - elemento.quantity,
             });
         });
+
+        // Limpia el carrito
+        //localStorage.removeItem("cartItems");
+        clearCart();
     };
 
     const handleChange = (evento) => {
@@ -52,7 +52,7 @@ const CheckoutContainer = () => {
 
     return (
         <div>
-            <h1>Checkout</h1>
+            <h2 style={{ backgroundColor: "#7E778C"}}>Checkout</h2>
 
             {!orderId ? (
                 <form onSubmit={handleSubmit}>
@@ -79,7 +79,11 @@ const CheckoutContainer = () => {
                     </Button>
                 </form>
             ) : (
-                <h3>Su numero de compra: {orderId} </h3>
+                <>
+                <h3>Orden de Compra Número: {orderId}</h3>
+                <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver a Productos</Button></Link>
+                <h2></h2>
+                </>
             )}
         </div>
     );

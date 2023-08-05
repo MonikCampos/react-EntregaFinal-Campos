@@ -49,13 +49,21 @@ const CartContainer = () => {
       {/* rendering con && */}
       {cart.length > 0 && (
         <>
+          <br />
           <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained" onClick={limpiar}>Limpiar carrito</Button>
           <Link to="/checkout">
             <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained">Terminar compra</Button>  
           </Link>
+          <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver a Productos</Button></Link>
+          <h2></h2>
         </>
       )}
-      {cart.length === 0 ? <h4 style={{ backgroundColor: "#F2CEDB"}}>El carrito está vacío</h4> : <h4 style={{ backgroundColor: "#7E778C"}}>El total del carrito es : {total} </h4>}
+      {cart.length === 0 ? 
+        <>
+          <h4 style={{ backgroundColor: "#F2CEDB"}}>El carrito está vacío</h4>
+          <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver a Productos</Button></Link>
+          <h2></h2>
+        </> : <h4 style={{ backgroundColor: "#7E778C"}}>El total del carrito es : {total} </h4>}
     </div>
   );
 };

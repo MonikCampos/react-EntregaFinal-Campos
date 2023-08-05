@@ -5,7 +5,7 @@ export const CartContext = createContext();
 const CartContextComponent = ({ children }) => {
     //Toda la logica para proveer a la aplicacion
     
-    const [cart, setCart] = useState([]); //estado glogbal para ser usado en toda la app
+    const [cart, setCart] = useState([]); //estado global para ser usado en toda la app
     //ver local storage
 
     const addToCart = (product) => {
@@ -23,8 +23,8 @@ const CartContextComponent = ({ children }) => {
             });
             setCart(newArr);
         } else {
-            //localStorage.setItem("cart", JSON.stringify(NEWARRAY))
             setCart([...cart, product]);
+            //localStorage.setItem("cart", JSON.stringify(cart))
         }
     };
 

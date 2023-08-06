@@ -51,7 +51,7 @@ const CartContainer = () => {
         <>
           <br />
           <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained" onClick={limpiar}>Limpiar carrito</Button>
-          <Link to="/checkout">
+          <Link to="/formik">
             <Button sx={{ color: "#F2CEDB", border: "none", backgroundColor: "#0E2940" }} size="small" variant="contained">Terminar compra</Button>  
           </Link>
           <Link to="/"><Button sx={{  color: "#F2CEDB", border:"none", backgroundColor: "#0E2940" }} size="small" variant="contained">Volver a Productos</Button></Link>

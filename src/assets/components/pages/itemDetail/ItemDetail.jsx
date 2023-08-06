@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 const ItemDetail = ( { cantidadEnCarrito, product, agregarAlCarrito } ) => {
   return (
     <>
-      <br />
       <div className="cardDetail">
         <Card sx={{ width: 500, backgroundColor: "#BFA4B3" }}>
           <CardMedia sx={{ height: 440 }} image={product.img} title={product.title} component='img'/>
@@ -35,7 +34,6 @@ const ItemDetail = ( { cantidadEnCarrito, product, agregarAlCarrito } ) => {
           </CardActions>
         </Card>
       </div>
-      <br />
     </>
   )
 }

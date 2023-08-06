@@ -42,7 +42,6 @@ const CheckoutContainer = () => {
         });
 
         // Limpia el carrito
-        //localStorage.removeItem("cartItems");
         clearCart();
     };
 

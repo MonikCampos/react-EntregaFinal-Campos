@@ -9,8 +9,8 @@
 
 h2 {
     color: var(--terciario);
-    /* background-color: var(--secundario); */
     text-align: center;
+    margin-bottom: 0px;
 }
 h4 {
     color: var(--terciario);

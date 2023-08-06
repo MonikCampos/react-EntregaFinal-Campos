@@ -1,4 +1,5 @@
 .cardDetail {
     display: flex;
     justify-content: center;
+    background-color:  #f2cedb;
 }

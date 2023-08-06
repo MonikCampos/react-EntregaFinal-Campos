@@ -36,7 +36,7 @@ const FormFormik = () => {
                     stock: elemento.stock - elemento.quantity,
                 });
             });
-
+            
             // Limpia el carrito
             clearCart();
         },
@@ -54,7 +54,7 @@ const FormFormik = () => {
     });
 
     return (
-        <div style={{ padding: "40px" }}>
+        <div style={{ padding: "40px", backgroundColor:  '#f2cedb' }}>
             {
                 !orderId ? <form onSubmit={handleSubmit}>
                     <TextField

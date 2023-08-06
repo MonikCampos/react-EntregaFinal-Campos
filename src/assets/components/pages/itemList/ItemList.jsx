@@ -13,7 +13,8 @@ const ItemList = ({ items }) => {
                 justifyContent: "space-evenly",
                 flexWrap: "wrap",
                 paddingTop: "50px",
-                gap: "20px"
+                gap: "20px",
+                backgroundColor: "#f2cedb"
             }}
         >
             {items.length > 0
@@ -27,7 +28,6 @@ const ItemList = ({ items }) => {
             </Stack>
             ))}
         </section>
-        <h2></h2>
         </>
     );
 };
